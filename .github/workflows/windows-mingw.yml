@@ -66,7 +66,7 @@ jobs:
         run: |
           & scripts\windows-mingw-publish.ps1 ${env:archiveName} ${env:targetName}
            $name = ${env:archiveName}
-           echo "::set-output name=packageName::$name"
+           echo "packageName=$name" >> $GITHUB_OUTPUT
       - uses: actions/upload-artifact@v2
         with:
           name: ${{ steps.package.outputs.packageName }}
@@ -83,4 +83,6 @@ jobs:
 
       - name: Run tests
         run: |
-          .\${env:archiveName}\${env:targetName} --version
+          echo ${env:archiveName}
+          echo ${env:targetName}
+          ${env:archiveName}\${env:targetName} --version
