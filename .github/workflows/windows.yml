@@ -37,7 +37,6 @@ jobs:
         with:
           version: ${{ matrix.qt_ver }}
           arch: ${{ matrix.qt_arch }}
-          cached: "false"
           aqtversion: "==2.0.5"
           modules: "addons.qtmultimedia"
       # 拉取代码
