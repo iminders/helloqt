@@ -88,6 +88,6 @@ jobs:
         run: |
           echo ${env:archiveName}
           echo ${env:targetName}
-          ${env:archiveName}/${env:targetName} --version
+          ./${env:archiveName}/${env:targetName} --version
 
 # echo "packageName=$name" >> $GITHUB_OUTPUT
