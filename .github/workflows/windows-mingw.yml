@@ -80,3 +80,7 @@ jobs:
           asset_name: ${{ steps.package.outputs.packageName }}.zip
           tag: ${{ github.ref }}
           overwrite: true
+
+      - name: Run tests
+        run: |
+          ./bin/release/${env:targetName} --version

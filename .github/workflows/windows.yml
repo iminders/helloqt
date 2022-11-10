@@ -89,4 +89,4 @@ jobs:
 
       - name: Run tests
         run: |
-          ./InnoSetup/build/cvdis.exe --version
+          ./bin/release/${env:targetName} --version
