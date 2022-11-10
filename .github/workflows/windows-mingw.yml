@@ -80,4 +80,3 @@ jobs:
           asset_name: ${{ steps.package.outputs.packageName }}.zip
           tag: ${{ github.ref }}
           overwrite: true
-# echo "packageName=$name" >> $GITHUB_OUTPUT
