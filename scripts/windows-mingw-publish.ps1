@@ -25,6 +25,7 @@ function Main() {
     Remove-Item -Path $archiveName -Include $excludeList -Recurse -Force
     # 打包zip
     Compress-Archive -Path $archiveName $archiveName'.zip'
+    bin\release\$targetName --version
 }
 
 if ($null -eq $archiveName || $null -eq $targetName) {
