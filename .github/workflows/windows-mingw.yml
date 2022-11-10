@@ -80,13 +80,4 @@ jobs:
           asset_name: ${{ steps.package.outputs.packageName }}.zip
           tag: ${{ github.ref }}
           overwrite: true
-
-      # - name: Run tests
-      #   env:
-      #     archiveName: ${{ matrix.qt_ver }}-${{ matrix.qt_arch }}
-      #   shell: pwsh
-      #   run: |
-      #     echo ${env:archiveName}
-      #     echo ${env:targetName}
-      #     ${env:archiveName}/${env:targetName} --version
 # echo "packageName=$name" >> $GITHUB_OUTPUT
