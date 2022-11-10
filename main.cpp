@@ -3,9 +3,6 @@
 #include <QApplication>
 
 const QString VERSION = APP_VERSION;
-const QString GIT_TAG =
-#include <git_tag.inc>
-    ;
 
 int main(int argc, char *argv[])
 {
@@ -13,8 +10,7 @@ int main(int argc, char *argv[])
     {
         if ((!strncmp(argv[1], "--version", 9)))
         {
-            qInfo() << QString("helloqt ") << VERSION << "\n"
-                    << GIT_TAG << "\n";
+            qInfo() << QString("helloqt ") << VERSION;
             return 0;
         }
     }
