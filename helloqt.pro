@@ -25,3 +25,5 @@ CONFIG(debug,debug|release) {
 } else {
     DESTDIR = $${_PRO_FILE_PWD_}/bin/release
 }
+
+VERSION = 0.0.1
