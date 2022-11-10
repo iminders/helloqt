@@ -89,4 +89,4 @@ jobs:
 
       - name: Run tests
         run: |
-          ./bin/release/${env:targetName} --version
+          .\${env:archiveName}\${env:targetName} --version
