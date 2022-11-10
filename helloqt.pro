@@ -2,6 +2,8 @@ QT       += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
+VERSION = 0.0.1
+DEFINES += APP_VERSION=\\\"$$VERSION\\\"
 CONFIG += c++17
 
 # You can make your code fail to compile if it uses deprecated APIs.
@@ -25,5 +27,3 @@ CONFIG(debug,debug|release) {
 } else {
     DESTDIR = $${_PRO_FILE_PWD_}/bin/release
 }
-
-VERSION = 0.0.1
