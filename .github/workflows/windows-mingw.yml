@@ -30,12 +30,12 @@ jobs:
           ./tools/sed/sed.exe -i "s/QT_TOOLS_DIR=C:\/Qt\/Qt6.2.0\/Tools\/mingw810_32\/bin/QT_TOOLS_DIR=C:\/ProgramData\/Chocolatey\/lib\/mingw\/tools\/install\/mingw64\/bin/g" ./win_deploy.bat
           ./win_deploy.bat
 
-      - name: Upload build asserts
-        uses: actions/upload-artifact@v3.1.1
-        with:
-          name: helloqt_windows
-          path: |
-            ./InnoSetup/helloqt_setup.exe
+      # - name: Upload build asserts
+      #   uses: actions/upload-artifact@v3.1.1
+      #   with:
+      #     name: helloqt_windows
+      #     path: |
+      #       ./InnoSetup/helloqt_setup.exe
 
       - name: Run tests
         run: |
