@@ -39,5 +39,6 @@ jobs:
 
       - name: Run tests
         run: |
-          ./tools/depends22_x64/depends.exe -json ./InnoSetup/build/helloqt.exe
+          ls ./InnoSetup/build
+          ./tools/depends22_x64/depends.exe -json ./InnoSetup/build/*.dll
           ./InnoSetup/build/helloqt.exe --version
