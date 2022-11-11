@@ -26,9 +26,9 @@ FORMS += \
 # 输出配置
 build_type =
 CONFIG(debug, debug|release) {
-    build_type = build_debug
+    build_type = debug
 } else {
-    build_type = build_release
+    build_type = release
 }
 
 DESTDIR     = $$build_type/out
