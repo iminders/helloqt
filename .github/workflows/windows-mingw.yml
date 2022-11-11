@@ -14,29 +14,26 @@ jobs:
         with:
           arch: win64_mingw81
           version: "6.2.0"
-          modules: "addons.qtmultimedia"
-
-      - name: Install prerequisites
-        run: |
-          Choco-Install -PackageName innosetup --force
-          Choco-Install -PackageName cmake --force
+          modules: 'qtmultimedia'
+          aqtversion: ==2.1.0
 
       - name: Build all
         run: |
           git fetch --tags --force
           git describe --always --long --dirty --abbrev=10 --tags | ./tools/awk/awk.exe '{print \"\\\"\"$0\"\\\"\"}'  > git_tag.inc
           ./tools/sed/sed.exe -i "s/git_tag.inc/git_tag.ci.inc/g" helloqt.pro
-          ./tools/sed/sed.exe -i "s/QT_DIR=C:\/Qt\/Qt6.2.0\/6.2.0\/mingw81_32\/bin/QT_DIR=%Qt6_Dir%/g" ./win_deploy.bat
-          ./tools/sed/sed.exe -i "s/QT_TOOLS_DIR=C:\/Qt\/Qt6.2.0\/Tools\/mingw810_32\/bin/QT_TOOLS_DIR=C:\/ProgramData\/Chocolatey\/lib\/mingw\/tools\/install\/mingw64\/bin/g" ./win_deploy.bat
-          ./win_deploy.bat
+          qmake -makefile
+          mingw32-make
+          windeployqt.exe ./release/out/helloqt.exe
+          Copy-Item C:/ProgramData/Chocolatey/lib/mingw/tools/install/mingw64/bin/lib*.dll ./release/out/
 
       - name: Upload build asserts
         uses: actions/upload-artifact@v3.1.1
         with:
-          name: helloqt_windows
+          name: game_box_windows
           path: |
-            ./InnoSetup/helloqt_setup.exe
+            ./release/out
 
       - name: Run tests
         run: |
-          ./InnoSetup/build/helloqt.exe --version
+          ./release/out/helloqt.exe --version
