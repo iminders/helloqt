@@ -39,7 +39,4 @@ jobs:
 
       - name: Run tests
         run: |
-          ls ./InnoSetup/build
-          ./tools/depends22_x64/depends.exe -h
-          ./tools/depends22_x64/depends.exe -json ./InnoSetup/build/libgcc_s_seh-1.dll
           ./InnoSetup/build/helloqt.exe --version
