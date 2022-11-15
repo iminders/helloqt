@@ -29,7 +29,8 @@ HEADERS += \
 FORMS += \
     mainwindow.ui
 
-
+RESOURCES += \
+        models/haarcascade_frontalface_alt2.xml
 # 输出配置
 build_type =
 CONFIG(debug, debug|release) {
