@@ -1,7 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
-const std::string xmlPath = "haarcascade_frontalface_alt2.xml";
+const std::string xmlPath = "face2.xml";
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent),

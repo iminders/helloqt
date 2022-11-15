@@ -30,7 +30,7 @@ FORMS += \
     mainwindow.ui
 
 RESOURCES += \
-        models/haarcascade_frontalface_alt2.xml
+        models/face2.xml
 # 输出配置
 build_type =
 CONFIG(debug, debug|release) {
@@ -101,7 +101,7 @@ macx:{
 
 }
 
-git_tag.target = $$PWD/git_tag.inc
-git_tag.depends = FORCE
-PRE_TARGETDEPS += $$PWD/git_tag.inc
-QMAKE_EXTRA_TARGETS += git_tag
+#git_tag.target = $$PWD/git_tag.inc
+#git_tag.depends = FORCE
+#PRE_TARGETDEPS += $$PWD/git_tag.inc
+#QMAKE_EXTRA_TARGETS += git_tag
