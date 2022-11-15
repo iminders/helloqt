@@ -14,7 +14,7 @@ jobs:
         with:
           arch: win64_mingw81
           version: "6.2.0"
-          modules: 'qtmultimedia'
+          modules: "qtmultimedia"
           aqtversion: ==2.1.0
 
       - name: Cache opencv
@@ -43,21 +43,21 @@ jobs:
             mingw32-make install
           }
 
-      # - name: Build all
-      #   run: |
-      #     git fetch --tags --force
-      #     git describe --always --long --dirty --abbrev=10 --tags | ./tools/awk/awk.exe '{print \"\\\"\"$0\"\\\"\"}'  > git_tag.inc
-      #     ./tools/sed/sed.exe -i "s/git_tag.inc/git_tag.ci.inc/g" helloqt.pro
-      #     ./tools/sed/sed.exe -i "s/QT_DIR=C:\/Qt\/Qt6.2.0\/6.2.0\/mingw81_32\/bin/QT_DIR=%Qt6_Dir%/g" ./win_deploy.bat
-      #     ./tools/sed/sed.exe -i "s/QT_TOOLS_DIR=C:\/Qt\/Qt6.2.0\/Tools\/mingw810_32\/bin/QT_TOOLS_DIR=C:\/ProgramData\/Chocolatey\/lib\/mingw\/tools\/install\/mingw64\/bin/g" ./win_deploy.bat
-      #     ./win_deploy.bat
+      - name: Build all
+        run: |
+          git fetch --tags --force
+          git describe --always --long --dirty --abbrev=10 --tags | ./tools/awk/awk.exe '{print \"\\\"\"$0\"\\\"\"}'  > git_tag.inc
+          ./tools/sed/sed.exe -i "s/git_tag.inc/git_tag.ci.inc/g" helloqt.pro
+          ./tools/sed/sed.exe -i "s/QT_DIR=C:\/Qt\/Qt6.2.0\/6.2.0\/mingw81_32\/bin/QT_DIR=%Qt6_Dir%/g" ./win_deploy.bat
+          ./tools/sed/sed.exe -i "s/QT_TOOLS_DIR=C:\/Qt\/Qt6.2.0\/Tools\/mingw810_32\/bin/QT_TOOLS_DIR=C:\/ProgramData\/Chocolatey\/lib\/mingw\/tools\/install\/mingw64\/bin/g" ./win_deploy.bat
+          ./win_deploy.bat
 
-      # - name: Upload build asserts
-      #   uses: actions/upload-artifact@v3.1.1
-      #   with:
-      #     name: helloqt_windows
-      #     path: |
-      #       ./InnoSetup/helloqt_setup.exe
-      # - name: Run tests
-      #   run: |
-      #     ./InnoSetup/build/helloqt.exe --version
+      - name: Upload build asserts
+        uses: actions/upload-artifact@v3.1.1
+        with:
+          name: helloqt_windows
+          path: |
+            ./InnoSetup/helloqt_setup.exe
+      - name: Run tests
+        run: |
+          ./InnoSetup/build/helloqt.exe --version

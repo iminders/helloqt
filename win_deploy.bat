@@ -7,6 +7,7 @@ set "QT_TOOLS_DIR=C:/Qt/Qt6.2.0/Tools/mingw810_32/bin"
 :: 定义Inno Setup目录
 set "INNO_SETUP_DIR=C:/Program Files (x86)/Inno Setup 6"
 
+set "OPENCV_DIR=C:/opencv/x64/mingw/bin"
 :: 定义版本号
 set "HELLOQT_VERSION=0.0.1"
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -39,8 +40,12 @@ xcopy /y .\build_release\out\helloqt.exe .\InnoSetup\build\
 xcopy /y models\face2.xml .\InnoSetup\build\
 :: 使用windeployqt拷贝依赖dll库到打包目录
 windeployqt --dir .\InnoSetup\build --no-translations --compiler-runtime .\InnoSetup\build\helloqt.exe
+xcopy /y "%OPENCV_DIR%\libopencv_imgproc455.dll" ".\InnoSetup\build\"
+xcopy /y "%OPENCV_DIR%\libopencv_core455.dll" ".\InnoSetup\build\"
+xcopy /y "%OPENCV_DIR%\libopencv_videoio455.dll" ".\InnoSetup\build\"
+xcopy /y "%OPENCV_DIR%\libopencv_objdetect455.dll" ".\InnoSetup\build\"
+
 xcopy /y "%QT_TOOLS_DIR%\lib*.dll" ".\InnoSetup\build\"
-xcopy /y "%QT_TOOLS_DIR%\..\lib\lib*.dll" ".\InnoSetup\build\"
 
 :: 打包
 echo "wait inno build setup..."
