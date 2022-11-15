@@ -1,11 +1,18 @@
+win32:{
+    include(platform_win32.pri)
+}
+
+unix:{
+    include(platform_unix.pri)
+}
+
 QT       += core gui
-QT       += multimedia multimediawidgets
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 DEFINES += QT_DEPRECATED_WARNINGS
 DEFINES += APP_VERSION="\\\"V$${HELLOQT_VERSION}\\\""
-CONFIG += c++17
+CONFIG += c++11
 CONFIG += console
 
 # You can make your code fail to compile if it uses deprecated APIs.
@@ -39,6 +46,12 @@ UI_DIR      = $$build_type/ui
 
 # 平台配置
 win32:{
+
+    INCLUDEPATH += $${OPENCV_DIR}\include\opencv2 \
+                    $${OPENCV_DIR}\include
+
+    LIBS += $${OPENCV_DIR}\x64\mingw\lib\libopencv_*.a
+
     VERSION = $${HELLOQT_VERSION}.000
     RC_ICONS = "img\ico.ico"
     QMAKE_TARGET_PRODUCT = "helloqt"
@@ -50,8 +63,19 @@ win32:{
 
 unix:!macx:{
     QMAKE_RPATHDIR=$ORIGIN
-    QMAKE_LFLAGS += -no-pie
+    ICON = "img/ico.icns"
+    QMAKE_INFO_PLIST= macos/Info.plist
 
+    INCLUDEPATH += -I $${OPENCV_DIR}/include/opencv4
+    DEPENDPATH +=$${OPENCV_DIR}/include/opencv4
+
+    INCLUDEPATH += -I $${OPENCV_DIR}/include
+    DEPENDPATH +=$${OPENCV_DIR}/include
+
+    LIBS += -L $${OPENCV_DIR}/lib/ -lopencv_imgproc
+    LIBS += -L $${OPENCV_DIR}/lib/ -lopencv_core
+    LIBS += -L $${OPENCV_DIR}/lib/ -lopencv_videoio
+    LIBS += -L $${OPENCV_DIR}/lib/ -lopencv_objdetect
 
     git_tag.commands = $$quote("cd $$PWD && git describe --always --long --dirty --abbrev=10 --tags | awk \'{print \"\\\"\"\$$0\"\\\"\"}\' > git_tag.inc")
 }
@@ -61,6 +85,16 @@ macx:{
     ICON = "img/ico.icns"
     QMAKE_INFO_PLIST= macos/Info.plist
 
+    INCLUDEPATH += -I $${OPENCV_DIR}/include/opencv4
+    DEPENDPATH +=$${OPENCV_DIR}/include/opencv4
+
+    INCLUDEPATH += -I $${OPENCV_DIR}/include
+    DEPENDPATH +=$${OPENCV_DIR}/include
+
+    LIBS += -L $${OPENCV_DIR}/lib/ -lopencv_imgproc
+    LIBS += -L $${OPENCV_DIR}/lib/ -lopencv_core
+    LIBS += -L $${OPENCV_DIR}/lib/ -lopencv_videoio
+    LIBS += -L $${OPENCV_DIR}/lib/ -lopencv_objdetect
 
     git_tag.commands = $$quote("cd $$PWD && git describe --always --long --dirty --abbrev=10 --tags | awk \'{print \"\\\"\"\$$0\"\\\"\"}\' > git_tag.inc")
 

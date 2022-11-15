@@ -1,13 +1,15 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include <QCamera>
-#include <QImageCapture>
+#include <QLabel>
 #include <QMainWindow>
-#include <QMediaCaptureSession>
-#include <QMediaDevices>
-#include <QMediaRecorder>
-#include <QVideoWidget>
+#include <QTimer>
+
+#include "opencv2/objdetect.hpp"
+#include <opencv2/core/core.hpp>
+#include <opencv2/highgui/highgui.hpp>
+#include <opencv2/imgproc/imgproc.hpp>
+#include <opencv2/videoio.hpp>
 
 QT_BEGIN_NAMESPACE
 namespace Ui
@@ -24,13 +26,24 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+    void imageShow(const cv::Mat &img, QLabel *label);
+    void updateShow();
+
+private slots:
+    void on_openButton_clicked();
+
+    void on_detectButton_clicked();
+
 private:
     Ui::MainWindow *ui;
 
-    QScopedPointer<QCamera> my_camera;
-    QScopedPointer<QMediaRecorder> my_mediaRecorder;
-    QMediaCaptureSession my_captureSession;
+    QTimer *timer;
+    cv::Mat frame;
+    QImage image;
+    cv::VideoCapture cap;
 
-    bool checkCameraAvailability(void);
+    cv::CascadeClassifier classifier; //创建分类器对象
+    bool isClassifierLoaded;          //分类器加载成功标识
+    std::vector<cv::Rect> faces;
 };
 #endif // MAINWINDOW_H

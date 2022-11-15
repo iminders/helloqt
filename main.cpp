@@ -1,6 +1,6 @@
 #include "mainwindow.h"
-#include <iostream>
 #include <QApplication>
+#include <iostream>
 
 const QString VERSION = APP_VERSION;
 

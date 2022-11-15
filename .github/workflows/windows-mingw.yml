@@ -17,23 +17,47 @@ jobs:
           modules: 'qtmultimedia'
           aqtversion: ==2.1.0
 
+      - name: Cache opencv
+        uses: actions/cache@v3
+        env:
+          cache-name: cache-opencv4.5.5
+        with:
+          path: |
+            C:/opencv
+          key: ${{ runner.os }}-build-${{ env.cache-name }}
+          restore-keys: |
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+
+      - name: Install prerequisites
+        run: |
+          Choco-Install -PackageName innosetup --force
+          Choco-Install -PackageName cmake --force
+          $c="C:\opencv"
+          if(-not (Test-Path $c))
+          {
+            git clone https://github.com/opencv/opencv.git --branch 4.5.5 --depth 1
+            cmake -G "MinGW Makefiles" -S opencv -B opencv/build -D CMAKE_INSTALL_PREFIX=C:/opencv -D ENABLE_PRECOMPILED_HEADERS=OFF -D WITH_MSMF=OFF -D BUILD_PERF_TESTS=OFF -D BUILD_TESTS=OFF -D BUILD_WITH_DEBUG_INFO=OFF -D BUILD_DOCS=OFF -D CMAKE_BUILD_TYPE=RELEASE
+            cd ./opencv/build
+            mingw32-make
+            mingw32-make install
+          }
+
       - name: Build all
         run: |
           git fetch --tags --force
           git describe --always --long --dirty --abbrev=10 --tags | ./tools/awk/awk.exe '{print \"\\\"\"$0\"\\\"\"}'  > git_tag.inc
           ./tools/sed/sed.exe -i "s/git_tag.inc/git_tag.ci.inc/g" helloqt.pro
-          qmake -makefile
-          mingw32-make
-          windeployqt.exe ./release/out/helloqt.exe
-          Copy-Item C:/ProgramData/Chocolatey/lib/mingw/tools/install/mingw64/bin/lib*.dll ./release/out/
+          ./tools/sed/sed.exe -i "s/QT_DIR=C:\/Qt\/Qt6.2.0\/6.2.0\/mingw81_32\/bin/QT_DIR=%Qt6_Dir%/g" ./win_deploy.bat
+          ./tools/sed/sed.exe -i "s/QT_TOOLS_DIR=C:\/Qt\/Qt6.2.0\/Tools\/mingw810_32\/bin/QT_TOOLS_DIR=C:\/ProgramData\/Chocolatey\/lib\/mingw\/tools\/install\/mingw64\/bin/g" ./win_deploy.bat
+          ./win_deploy.bat
 
       - name: Upload build asserts
         uses: actions/upload-artifact@v3.1.1
         with:
           name: helloqt_windows
           path: |
-            ./release/out
-
+            ./InnoSetup/helloqt_setup.exe
       - name: Run tests
         run: |
-          ./release/out/helloqt.exe --version
+          ./InnoSetup/build/helloqt.exe --version
