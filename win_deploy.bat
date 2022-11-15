@@ -2,8 +2,8 @@
 
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 :: 定义Qt目录
-set "QT_DIR=C:/Qt/Qt6.2.0/6.2.0/mingw81_32/bin"
-set "QT_TOOLS_DIR=C:/Qt/Qt6.2.0/Tools/mingw810_32/bin"
+set "QT_DIR=D:/programes/Qt62/6.2.4/mingw_64/bin"
+set "QT_TOOLS_DIR=D:/programs/Qt62/Tools/mingw1120_64/bin"
 :: 定义Inno Setup目录
 set "INNO_SETUP_DIR=C:/Program Files (x86)/Inno Setup 6"
 
