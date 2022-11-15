@@ -75,3 +75,6 @@ bin/
 build-*/
 git_tag.inc
 .vscode
+debug/
+release/
+*_setup.exe

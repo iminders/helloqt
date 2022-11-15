@@ -59,7 +59,6 @@ win32:{
     QMAKE_TARGET_DESCRIPTION = "helloqt based on Qt $$[QT_VERSION]"
     QMAKE_TARGET_COPYRIGHT = "GNU General Public License v3.0"
 
-    git_tag.commands = $$quote("cd $$PWD && git describe --always --long --dirty --abbrev=10 --tags | $$PWD/tools/awk/awk.exe \'{print \"\\\"\"\$$0\"\\\"\"}\' > git_tag.inc")
 }
 
 unix:!macx:{
@@ -78,7 +77,6 @@ unix:!macx:{
     LIBS += -L $${OPENCV_DIR}/lib/ -lopencv_videoio
     LIBS += -L $${OPENCV_DIR}/lib/ -lopencv_objdetect
 
-    git_tag.commands = $$quote("cd $$PWD && git describe --always --long --dirty --abbrev=10 --tags | awk \'{print \"\\\"\"\$$0\"\\\"\"}\' > git_tag.inc")
 }
 
 macx:{
@@ -96,12 +94,6 @@ macx:{
     LIBS += -L $${OPENCV_DIR}/lib/ -lopencv_core
     LIBS += -L $${OPENCV_DIR}/lib/ -lopencv_videoio
     LIBS += -L $${OPENCV_DIR}/lib/ -lopencv_objdetect
-
-    git_tag.commands = $$quote("cd $$PWD && git describe --always --long --dirty --abbrev=10 --tags | awk \'{print \"\\\"\"\$$0\"\\\"\"}\' > git_tag.inc")
-
 }
 
-git_tag.target = $$PWD/git_tag.inc
-git_tag.depends = FORCE
-PRE_TARGETDEPS += $$PWD/git_tag.inc
-QMAKE_EXTRA_TARGETS += git_tag
+

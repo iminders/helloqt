@@ -21,8 +21,8 @@ del .qmake.stash Makefile
 if exist ".\build_debug" (
     rmdir /Q /S .\build_debug
 )
-if exist ".\build_release" (
-    rmdir /Q /S .\build_release
+if exist ".\release" (
+    rmdir /Q /S .\release
 )
 qmake helloqt.pro -spec win32-g++
 mingw32-make -j8
@@ -36,7 +36,7 @@ copy /y .\InnoSetup\build_setup.iss .\InnoSetup\build_temp_setup.iss
 .\tools\sed\sed.exe -i "s/#VERSIONINFOVERSION#/%HELLOQT_VERSION%.000/g" .\InnoSetup\build_temp_setup.iss
 del /f /q /a .\sed*
 :: 构建打包目录
-xcopy /y .\build_release\out\helloqt.exe .\InnoSetup\build\
+xcopy /y .\release\out\helloqt.exe .\InnoSetup\build\
 xcopy /y models\face2.xml .\InnoSetup\build\
 :: 使用windeployqt拷贝依赖dll库到打包目录
 windeployqt --dir .\InnoSetup\build --no-translations --compiler-runtime .\InnoSetup\build\helloqt.exe
