@@ -101,7 +101,7 @@ macx:{
 
 }
 
-#git_tag.target = $$PWD/git_tag.inc
-#git_tag.depends = FORCE
-#PRE_TARGETDEPS += $$PWD/git_tag.inc
-#QMAKE_EXTRA_TARGETS += git_tag
+git_tag.target = $$PWD/git_tag.inc
+git_tag.depends = FORCE
+PRE_TARGETDEPS += $$PWD/git_tag.inc
+QMAKE_EXTRA_TARGETS += git_tag
