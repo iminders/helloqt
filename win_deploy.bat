@@ -36,10 +36,10 @@ copy /y .\InnoSetup\build_setup.iss .\InnoSetup\build_temp_setup.iss
 .\tools\sed\sed.exe -i "s/#VERSIONINFOVERSION#/%HELLOQT_VERSION%.000/g" .\InnoSetup\build_temp_setup.iss
 del /f /q /a .\sed*
 :: 构建打包目录
-xcopy /y .\release\out\helloqt.exe .\InnoSetup\build\
+xcopy /y .\release\out\HelloQT.exe .\InnoSetup\build\
 xcopy /y models\face2.xml .\InnoSetup\build\
 :: 使用windeployqt拷贝依赖dll库到打包目录
-windeployqt --dir .\InnoSetup\build --no-translations --compiler-runtime .\InnoSetup\build\helloqt.exe
+windeployqt --dir .\InnoSetup\build --no-translations --compiler-runtime .\InnoSetup\build\HelloQT.exe
 xcopy /y "%OPENCV_DIR%\libopencv_imgproc455.dll" ".\InnoSetup\build\"
 xcopy /y "%OPENCV_DIR%\libopencv_core455.dll" ".\InnoSetup\build\"
 xcopy /y "%OPENCV_DIR%\libopencv_videoio455.dll" ".\InnoSetup\build\"

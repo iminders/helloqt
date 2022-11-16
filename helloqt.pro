@@ -12,7 +12,7 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 DEFINES += QT_DEPRECATED_WARNINGS
 DEFINES += APP_VERSION="\\\"V$${HELLOQT_VERSION}\\\""
-CONFIG += c++11
+CONFIG += c++17
 CONFIG += console
 
 # You can make your code fail to compile if it uses deprecated APIs.
@@ -53,8 +53,8 @@ win32:{
 
     VERSION = $${HELLOQT_VERSION}.000
     RC_ICONS = "img\ico.ico"
-    QMAKE_TARGET_PRODUCT = "helloqt"
-    QMAKE_TARGET_DESCRIPTION = "helloqt based on Qt $$[QT_VERSION]"
+    QMAKE_TARGET_PRODUCT = "HelloQT"
+    QMAKE_TARGET_DESCRIPTION = "HelloQT based on Qt $$[QT_VERSION]"
     QMAKE_TARGET_COPYRIGHT = "GNU General Public License v3.0"
 
 }

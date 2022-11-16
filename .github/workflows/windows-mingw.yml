@@ -14,8 +14,6 @@ jobs:
         with:
           arch: win64_mingw81
           version: "6.2.0"
-          modules: "qtmultimedia"
-          aqtversion: ==2.1.0
 
       - name: Cache opencv
         uses: actions/cache@v3
@@ -53,9 +51,9 @@ jobs:
       - name: Upload build asserts
         uses: actions/upload-artifact@v3.1.1
         with:
-          name: helloqt_windows
+          name: HelloQT_windows
           path: |
-            ./InnoSetup/helloqt_setup.exe
+            ./InnoSetup/HelloQT_setup.exe
       - name: Run tests
         run: |
-          ./InnoSetup/build/helloqt.exe --version
+          ./InnoSetup/build/HelloQT.exe --version

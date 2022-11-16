@@ -1,4 +1,5 @@
 #include "mainwindow.h"
+
 #include <QApplication>
 #include <iostream>
 
@@ -11,7 +12,7 @@ int main(int argc, char *argv[])
     {
         if ((!strncmp(argv[1], "--version", 9)))
         {
-            std::cout << "std:helloqt " << VERSION.toStdString() << "\n";
+            std::cout << "HelloQT " << VERSION.toStdString() << "\n";
             return 0;
         }
     }
