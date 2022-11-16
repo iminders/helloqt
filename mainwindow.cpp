@@ -1,17 +1,27 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+const QString VERSION = APP_VERSION;
 
-const std::string xmlPath = "face2.xml";
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent),
-      timer(new QTimer),
-      ui(new Ui::MainWindow)
+      ui(new Ui::MainWindow),
+      timer(new QTimer)
 {
     ui->setupUi(this);
+    this->setWindowTitle("HelloQT " + VERSION);
 
     connect(timer, &QTimer::timeout, this, &MainWindow::updateShow);
-    isClassifierLoaded = classifier.load(xmlPath); //加载训练文件
+
+    QFile file(modelPath);
+    if (file.exists()) {
+        qInfo() << modelPath;
+        isClassifierLoaded = classifier.load(modelPath.toStdString()); //加载训练文件
+    }
+    else {
+        ui->label_result->setText(QString("请设置模型文件目录"));
+        isClassifierLoaded = false;
+    }
 }
 
 MainWindow::~MainWindow()
@@ -19,11 +29,13 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+
 void MainWindow::updateShow()
 {
     cap >> frame;
-
     imageShow(frame, ui->label_video);
+
+    timer->start(50);
 }
 
 void MainWindow::on_openButton_clicked()
@@ -38,19 +50,14 @@ void MainWindow::on_detectButton_clicked()
     timer->stop();
     cap.release();
 
-    QImage this_image = image.scaled(ui->label_out->size(),
-                                     Qt::KeepAspectRatio,
-                                     Qt::SmoothTransformation);
-    ui->label_out->setPixmap(QPixmap::fromImage(this_image));
-
     QString tmp = "";
-    for (int i = 0; i < faces.size(); i++)
+    for (int i = 0; i < (int)faces.size(); i++)
     {
         tmp.append(QString("Face:") +
                    QString::number(i).leftJustified(4, ' ') +
                    QString(" x=") + QString::number(faces[i].x, 'f', 1).rightJustified(4, ' ') +
                    QString(", y=") + QString::number(faces[i].y, 'f', 1).rightJustified(4, ' ') +
-                   QString(" width=") + QString::number(faces[i].width, 'f', 1).rightJustified(4, ' ') +
+                   QString(", width=") + QString::number(faces[i].width, 'f', 1).rightJustified(4, ' ') +
                    QString(", height=") + QString::number(faces[i].height, 'f', 1).rightJustified(4, ' ') +
                    QString("\n"));
     }
@@ -89,6 +96,8 @@ QImage mat2QImage(cv::Mat cvImg)
 
 void MainWindow::imageShow(const cv::Mat &img, QLabel *label)
 {
+    if (img.empty())
+        return;
     if (isClassifierLoaded) //加载训练文件已成功
     {
         cv::Mat gray;
@@ -102,7 +111,7 @@ void MainWindow::imageShow(const cv::Mat &img, QLabel *label)
                                     cv::Size(30, 30)); //检测人脸
 
         //画方框
-        for (int i = 0; i < faces.size(); i++)
+        for (int i = 0; i < (int)faces.size(); i++)
         {
             cv::Point centera(faces[i].x, faces[i].y);
             cv::Point centerb(faces[i].x + faces[i].width, faces[i].y + faces[i].height);
@@ -117,3 +126,20 @@ void MainWindow::imageShow(const cv::Mat &img, QLabel *label)
                          Qt::SmoothTransformation);
     label->setPixmap(QPixmap::fromImage(image));
 }
+
+
+
+void MainWindow::on_action_model_triggered()
+{
+    QString srcDir = QFileDialog::getExistingDirectory(this, QString("选择模型目录"), modelDir);
+    if (srcDir.isEmpty()){
+        return;
+    }
+    else{
+        qDebug() << "模型目录:" << srcDir;
+        modelPath = srcDir + QString("/face2.xml");
+        qDebug() << modelPath;
+        isClassifierLoaded = classifier.load(modelPath.toStdString()); //加载训练文件
+    }
+}
+

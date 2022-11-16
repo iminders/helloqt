@@ -12,12 +12,10 @@ int main(int argc, char *argv[])
     {
         if ((!strncmp(argv[1], "--version", 9)))
         {
-            qInfo() << QString("helloqt ") << VERSION;
             std::cout << "std:helloqt " << VERSION.toStdString() << "\n";
             return 0;
         }
     }
-
     MainWindow w;
     w.show();
     return a.exec();

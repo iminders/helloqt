@@ -29,8 +29,6 @@ HEADERS += \
 FORMS += \
     mainwindow.ui
 
-RESOURCES += \
-        models/face2.xml
 # 输出配置
 build_type =
 CONFIG(debug, debug|release) {
@@ -95,5 +93,6 @@ macx:{
     LIBS += -L $${OPENCV_DIR}/lib/ -lopencv_videoio
     LIBS += -L $${OPENCV_DIR}/lib/ -lopencv_objdetect
 }
+
 
 

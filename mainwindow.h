@@ -4,6 +4,7 @@
 #include <QLabel>
 #include <QMainWindow>
 #include <QTimer>
+#include <QFileDialog>
 
 #include "opencv2/objdetect.hpp"
 #include <opencv2/core/core.hpp>
@@ -34,9 +35,14 @@ private slots:
 
     void on_detectButton_clicked();
 
+    void on_action_model_triggered();
+
 private:
     Ui::MainWindow *ui;
 
+    // TODO: 自动获取模型文件存储路径
+    QString modelDir = "/Users/liuwen/Documents/work/repos/github.com/iminders/helloqt/models";
+    QString modelPath = modelDir.append("/face2.xml");
     QTimer *timer;
     cv::Mat frame;
     QImage image;
