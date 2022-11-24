@@ -58,4 +58,4 @@ jobs:
 
       - name: Run tests
         run: |
-          ./InnoSetup/build/HelloQT.exe --version
+          ./InnoSetup/build/helloqt.exe --version
