@@ -47,6 +47,7 @@ jobs:
           ./tools/sed/sed.exe -i "s/QT_DIR=D:\/programes\/Qt62\/6.2.4\/mingw_64\/bin/QT_DIR=%Qt6_Dir%/g" ./win_deploy.bat
           ./tools/sed/sed.exe -i "s/QT_TOOLS_DIR=D:\/programs\/Qt62\/Tools\/mingw1120_64\/bin/QT_TOOLS_DIR=C:\/ProgramData\/Chocolatey\/lib\/mingw\/tools\/install\/mingw64\/bin/g" ./win_deploy.bat
           ./win_deploy.bat
+          ls ./release/out
 
       - name: Upload build asserts
         uses: actions/upload-artifact@v3.1.1
@@ -54,6 +55,7 @@ jobs:
           name: HelloQT_windows
           path: |
             ./InnoSetup/HelloQT_setup.exe
+
       - name: Run tests
         run: |
           ./InnoSetup/build/HelloQT.exe --version
