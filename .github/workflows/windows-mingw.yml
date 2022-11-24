@@ -56,6 +56,6 @@ jobs:
           path: |
             ./InnoSetup/HelloQT_setup.exe
 
-      - name: Run tests
-        run: |
-          ./InnoSetup/build/helloqt.exe --version
+      # - name: Run tests
+      #   run: |
+      #     ./InnoSetup/build/helloqt.exe --version
