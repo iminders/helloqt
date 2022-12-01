@@ -92,6 +92,7 @@ macx:{
     LIBS += -L $${OPENCV_DIR}/lib/ -lopencv_core
     LIBS += -L $${OPENCV_DIR}/lib/ -lopencv_videoio
     LIBS += -L $${OPENCV_DIR}/lib/ -lopencv_objdetect
+    LIBS += -L $${OPENCV_DIR}/lib/ -lopencv_dnn
 }
 
 
