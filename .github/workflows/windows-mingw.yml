@@ -49,12 +49,12 @@ jobs:
           ./win_deploy.bat
           ls ./release/out
 
-      - name: Upload build asserts
-        uses: actions/upload-artifact@v3.1.1
-        with:
-          name: HelloQT_windows
-          path: |
-            ./InnoSetup/HelloQT_setup.exe
+      # - name: Upload build asserts
+      #   uses: actions/upload-artifact@v3.1.1
+      #   with:
+      #     name: HelloQT_windows
+      #     path: |
+      #       ./InnoSetup/HelloQT_setup.exe
 
       # - name: Run tests
       #   run: |
