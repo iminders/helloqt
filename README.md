@@ -15,4 +15,4 @@ win10:
 - [ ] [DeepFace](https://github.com/serengil/deepface)
 - [x] [YoloV7](https://github.com/WongKinYiu/yolov7)
 - [ ] [mmaction2 models](https://github.com/open-mmlab/mmaction2)
-- [ ] [中文手写识别](https://github.com/intel/handwritten-chinese-ocr-samples)
+- [ ] [中文手写识别](https://github.com/chineseocr/chineseocr)
