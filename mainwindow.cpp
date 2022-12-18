@@ -178,14 +178,14 @@ void MainWindow::updateShow()
     cap >> frame;
     imageShow(frame, ui->label_video);
 
-    timer->start(500);
+    timer->start(200);
 }
 
 void MainWindow::on_openButton_clicked()
 {
     cap.open(0);
 
-    timer->start(500);
+    timer->start(200);
 }
 
 void MainWindow::on_detectButton_clicked()
